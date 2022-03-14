@@ -1,0 +1,24 @@
+div {
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+label {                          
+    font-size: 100%;
+    display: inline-block;
+    width: 50px;
+    text-align: justify;
+}
+
+header {
+    font-size: 300%;
+}
+.labelHome {
+    margin-left: 20px;
+    border: 1px outset black;
+    width: 200px;
+}
+
+#map { 
+    height: 430px; 
+}
