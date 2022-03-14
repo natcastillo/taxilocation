@@ -19,7 +19,7 @@ const showData = async () => {
             response.json().then(json => {
                 latID.textContent = json.lat;
                 longID.textContent = json.lng;
-                dateID.textContent = json.date;
+                dateID.textContent = json.date.split('T').join(' ').split('.')[0];
                 timeID.textContent = json.hour;
                 marcador.setLatLng([json.lat,json.lng])
             });
