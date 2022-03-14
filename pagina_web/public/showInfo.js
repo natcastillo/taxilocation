@@ -6,7 +6,9 @@ const timeID = document.getElementById('timeID');
 const marcador = L.marker([0, 0]).addTo(map);
 
 const showData = async () => {
-    fetch('http://localhost:5000/data', {
+    const url = window.location;
+    const link = url + "/data";
+    fetch(link, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
