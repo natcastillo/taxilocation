@@ -7,7 +7,7 @@ const marcador = L.marker([0, 0]).addTo(map);
 
 const showData = async () => {
     const url = window.location;
-    const link = url + "/data";
+    const link = url + "data";
     fetch(link, {
         method: 'GET',
         headers: {
