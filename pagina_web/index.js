@@ -9,7 +9,6 @@ const data = {
   date: ""
 }
 
-/*pruebita*/
 const connectionString =
   "postgres://gps2sms_user:AwjZG2W7HorhezoDQGUAXM7IGjq1KJ2W@oregon-postgres.render.com/gps2sms?ssl=true";
 
