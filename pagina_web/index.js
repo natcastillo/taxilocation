@@ -97,4 +97,4 @@ server.on('listening', (req, res) => {
 
 
 server.bind(3000);
-
+app.listen(5000, () => console.log('Server on port: 5000'));
