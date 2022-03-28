@@ -25,6 +25,7 @@ const createTable = async () => {
   await client.query(query);
 };
 
+
 const insertData = async (lat, lng, date, hour) => {
   const query = `INSERT INTO gps2sms_table (lat, lng, date, hour) VALUES ($1, $2, $3, $4)`;
   await client.query(query, [lat, lng, date, hour]);
