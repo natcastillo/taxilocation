@@ -53,6 +53,28 @@ const dropTable = async () => {
 //dropTable();
 //insertData(latitud, longitud, fecha);
 
+/*Intento de conexion a la rds
+
+var pg = require('pg');
+var conString = "postgres://username:@db.us-east-2.rds.amazonaws.com:5432/testdb";
+
+var client_Db = new pg.Client(conString);
+client.connect();
+
+var query = client_Db.query("SELECT * FROM t1");
+//fired after last row is emitted
+
+query.on('row', function(row) {
+    console.log(row);
+});
+
+query.on('end', function() {
+    client_Db.end();
+});
+
+Termino de intento de conexion*/
+
+
 const app = express();
 app.use(express.json())
 
