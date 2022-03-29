@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-const { Client } = require("pg");
+//require('dotenv').config();
 
 const data = {
   lat: "",
@@ -9,11 +9,30 @@ const data = {
   date: ""
 }
 
+/* Conexión de de la rds 
+
+const { Client } = require('pg')
+
+const connectionData = {
+  user: process.env.DB_USER,
+  host: process.env.DB_HOST,
+  database: process.env.DB_DATABASE,
+  password: process.env.DB_PWRD,
+  port: 5432,
+}
+const client = new Client(connectionData)
+
+client.connect()*/
+
+
+/* Conexión de de la base de datos local*/
+const { Client } = require("pg");
 const connectionString =
   "postgres://gps2sms_user:AwjZG2W7HorhezoDQGUAXM7IGjq1KJ2W@oregon-postgres.render.com/gps2sms?ssl=true";
 
 const client = new Client({ connectionString });
 client.connect();
+
 
 const createTable = async () => {
   const query = `CREATE TABLE IF NOT EXISTS gps2sms_table (
@@ -53,26 +72,7 @@ const dropTable = async () => {
 //dropTable();
 //insertData(latitud, longitud, fecha);
 
-/*Intento de conexion a la rds
 
-var pg = require('pg');
-var conString = "postgres://username:@db.us-east-2.rds.amazonaws.com:5432/testdb";
-
-var client_Db = new pg.Client(conString);
-client.connect();
-
-var query = client_Db.query("SELECT * FROM t1");
-//fired after last row is emitted
-
-query.on('row', function(row) {
-    console.log(row);
-});
-
-query.on('end', function() {
-    client_Db.end();
-});
-
-Termino de intento de conexion*/
 
 
 const app = express();
@@ -82,8 +82,10 @@ app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res) => {
   //res.send("hello world!");
+  console.log(process.env.DB_DATABASE);
   res.sendFile(path.join(__dirname + "/paginaweb.html"));
 });
+
 const getLastLocation = async () => {
   const query = `SELECT * FROM gps2sms_table ORDER BY ID DESC LIMIT 1`;
   const {rows:[{lat,lng,date,hour}]} = await client.query(query);
@@ -91,8 +93,7 @@ const getLastLocation = async () => {
 };
 app.get("/data", async (req, res) => {
     const info = await getLastLocation()
-    res.send(info).status(200);
-  
+    res.send(info).status(200); 
 });
 
 const dgram = require('dgram');
