@@ -2,82 +2,42 @@ const express = require("express");
 const path = require("path");
 require('dotenv').config();
 
+
 const data = {
   lat: "",
   long: "",
   time: "",
-  date: ""
+  date: "",
+  
 }
 
 //Conexión de de la rds 
 
-const { Client } = require('pg')
+const mysql  = require('mysql')
+var connection = mysql.createConnection({
 
-const connectionData = {
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_DATABASE,
-  password: process.env.DB_PWRD,
-  port: 5432,
-}
-const client = new Client(connectionData)
+  user: process.env.U,
+  host: process.env.H,
+  database: process.env.D,
+  password: process.env.P,
+  port: "3306"
+})
+connection.connect(function (err){
+  if(err)throw err;
+  console.log("conectao")
+})
 
-client.connect();
-
-
-/* Conexión de de la base de datos local*/
-// const { Client } = require("pg");
-// const connectionString =
- // "postgres://gps2sms_user:AwjZG2W7HorhezoDQGUAXM7IGjq1KJ2W@oregon-postgres.render.com/gps2sms?ssl=true";
-
-// const client = new Client({ connectionString });
-// client.connect();
-
-
-const createTable = async () => {
-  const query = `CREATE TABLE IF NOT EXISTS gps2sms_table (
-        id SERIAL PRIMARY KEY,
-        lat REAL,
-        lng REAL,
-        date TIMESTAMP,
-        hour TIME)`;
-  await client.query(query);
-};
 
 
 const insertData = async (lat, lng, date, hour) => {
-  const query = `INSERT INTO gps2sms_table (lat, lng, date, hour) VALUES ($1, $2, $3, $4)`;
-  await client.query(query, [lat, lng, date, hour]);
+  const dateComplete = date + " " + hour;  
+  const query = `INSERT INTO gps2sms_table (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}")`;
+  console.log(dateComplete)
+  connection.query(query, function(err, result){
+    if(err)throw err;
+    console.log("insertao")
+  })
 };
-//createTable();
-const listTables = async () => {
-  const query = `SELECT 
-   table_name, 
-   column_name, 
-   data_type 
-FROM 
-   information_schema.columns
-WHERE 
-   table_name = 'gps2sms_table';
-`;
-  const res = await client.query(query);
-  console.log(res.rows);
-};
-//listTables();
-
-const dropTable = async () => {
-  const query = `DROP TABLE gps2sms_table`;
-  await client.query(query);
-};
-//dropTable();
-//insertData(latitud, longitud, fecha);
-//<<<<<<< HEAD
-
-
-
-
-//=======
-// Comentario"""//
 //>>>>>>> main
 const app = express();
 app.use(express.json())
@@ -92,7 +52,7 @@ app.get("/", (req, res) => {
 
 const getLastLocation = async () => {
   const query = `SELECT * FROM gps2sms_table ORDER BY ID DESC LIMIT 1`;
-  const {rows:[{lat,lng,date,hour}]} = await client.query(query);
+  const {rows:[{lat,lng,date,hour}]} = await connection.query(query);
   return {lat,lng,date,hour}
 };
 app.get("/data", async (req, res) => {
@@ -101,6 +61,7 @@ app.get("/data", async (req, res) => {
 });
 
 const dgram = require('dgram');
+const { time } = require("console");
 const server = dgram.createSocket('udp4');
 server.on('error', (err) => {
   console.log(`server error:\n${err.stack}`);
@@ -114,7 +75,7 @@ server.on('message', async (msg, senderInfo) => {
   data.time = mensaje[2]
   data.date = mensaje[3]
   console.table(data)
-  insertData(data.lat,data.long,new Date(data.date),data.time);
+  insertData(data.lat,data.long, data.date,data.time);
   server.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
   })
