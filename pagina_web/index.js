@@ -13,20 +13,18 @@ const data = {
 
 //Conexión de de la rds 
 
-const mysql  = require('mysql')
-var connection = mysql.createConnection({
-
+const mysql  = require('mysql2');
+const connection = mysql.createConnection({
   user: process.env.U,
   host: process.env.H,
   database: process.env.D,
   password: process.env.P,
   port: "3306"
-})
+})  
 connection.connect(function (err){
   if(err)throw err;
   console.log("conectao")
 })
-
 
 
 
@@ -39,8 +37,6 @@ const insertData = async (lat, lng, date, hour) => {
     console.log("insertao")
   })
 };
-
-
 //>>>>>>> main
 const app = express();
 app.use(express.json())
@@ -53,21 +49,26 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname + "/paginaweb.html"));
 });
 
-const getLastLocation = async () => {
-  const query = `SELECT * FROM gps2sms_table ORDER BY ID DESC LIMIT 1`;
-  //const {rows:[{lat,lng,date}]} = 
-  const variablefea = await connection.query(query);
-  console.log(variablefea)
-  const {
-    lat, lng, date
-  } = variablefea
-  console.log(lat, lng,date)
+
+const getRecordInfo = async (date1,date2) => {
+  const query = `SELECT * FROM gps2sms_table WHERE date BETWEEN ${date1} AND ${date2}`;
+  const {rows:[{lat,lng,date}]} = await connection.query(query);
   return {lat,lng,date}
 };
-
 app.get("/data", async (req, res) => {
-    const info = await getLastLocation()
-    res.send(info).status(200); 
+  const query = `SELECT * FROM gps2sms_table ORDER BY ID DESC LIMIT 1`;
+  connection.query(query,(err,result) => {
+    if (!err) {
+      return res.send(result).status(200);     
+    } else {
+        console.log(`Ha ocurrido el siguiente ${err}`);
+        return res.status(500);
+    };
+  });
+});
+app.get("/record", async (req, res) => {
+  const info = await getLastLocation()
+  res.send(info).status(200); 
 });
 
 const dgram = require('dgram');

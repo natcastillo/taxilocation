@@ -2,7 +2,8 @@ const latID = document.getElementById('latID');
 const longID = document.getElementById('longID');
 const dateID = document.getElementById('dateID');
 const timeID = document.getElementById('timeID');
-
+const polylineCoords =  [];
+const polyline = L.polyline([[0,0]],{color:'red',opacity:1}).addTo(map);
 const marcador = L.marker([0, 0]).addTo(map);
 
 const showData = async () => {
@@ -17,11 +18,13 @@ const showData = async () => {
     ).then(response => {
         if (response.ok) {
             response.json().then(json => {
-                latID.textContent = json.lat;
-                longID.textContent = json.lng;
-                dateID.textContent = json.date.split('T').join(' ').split('.')[0];
-                timeID.textContent = json.hour;
-                marcador.setLatLng([json.lat,json.lng])
+                const lastInfo = json[0];
+                latID.textContent = lastInfo.lat;
+                longID.textContent = lastInfo.lng;
+                dateID.textContent = lastInfo.date.split('T').join(' ').split('.')[0];
+                marcador.setLatLng([lastInfo.lat,lastInfo.lng])
+                polylineCoords.push([lastInfo.lat,lastInfo.lng])
+                polyline.setLatLngs(polylineCoords);
             });
         }
     });
