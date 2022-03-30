@@ -1,6 +1,6 @@
 const express = require("express");
 const path = require("path");
-//require('dotenv').config();
+require('dotenv').config();
 
 const data = {
   lat: "",
@@ -9,7 +9,7 @@ const data = {
   date: ""
 }
 
-/* Conexión de de la rds 
+//Conexión de de la rds 
 
 const { Client } = require('pg')
 
@@ -22,16 +22,16 @@ const connectionData = {
 }
 const client = new Client(connectionData)
 
-client.connect()*/
+client.connect();
 
 
 /* Conexión de de la base de datos local*/
-const { Client } = require("pg");
-const connectionString =
-  "postgres://gps2sms_user:AwjZG2W7HorhezoDQGUAXM7IGjq1KJ2W@oregon-postgres.render.com/gps2sms?ssl=true";
+// const { Client } = require("pg");
+// const connectionString =
+ // "postgres://gps2sms_user:AwjZG2W7HorhezoDQGUAXM7IGjq1KJ2W@oregon-postgres.render.com/gps2sms?ssl=true";
 
-const client = new Client({ connectionString });
-client.connect();
+// const client = new Client({ connectionString });
+// client.connect();
 
 
 const createTable = async () => {
