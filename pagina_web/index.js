@@ -24,7 +24,7 @@ var connection = mysql.createConnection({
 })
 connection.connect(function (err){
   if(err)throw err;
-  ////console.log("conectao")
+  console.log("conectao")
 })
 
 
@@ -33,10 +33,10 @@ connection.connect(function (err){
 const insertData = async (lat, lng, date, hour) => {
   const dateComplete = date + " " + hour;  
   const query = `INSERT INTO gps2sms_table (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}")`;
-  ////console.log(dateComplete)
+  console.log(dateComplete)
   connection.query(query, function(err, result){
     if(err)throw err;
-    ////console.log("insertao")
+    console.log("insertao")
   })
 };
 
@@ -49,7 +49,7 @@ app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res) => {
   //res.send("hello world!");
-  ////console.log(process.env.DB_DATABASE);
+  console.log(process.env.DB_DATABASE);
   res.sendFile(path.join(__dirname + "/paginaweb.html"));
 });
 
@@ -71,28 +71,28 @@ app.get("/data", async (req, res) => {
 });
 
 const dgram = require('dgram');
-const { time } = require("//console");
+const { time } = require("console");
 const server = dgram.createSocket('udp4');
 server.on('error', (err) => {
-  //console.log(`server error:\n${err.stack}`);
+  console.log(`server error:\n${err.stack}`);
   server.close();
 });
 server.on('message', async (msg, senderInfo) => {
-  ////console.log('Messages received ' + msg)
+  console.log('Messages received ' + msg)
   const mensaje = String(msg).split(",")
   data.lat = mensaje[0]
   data.long = mensaje[1]
   data.time = mensaje[2]
   data.date = mensaje[3]
-  //console.table(data)
+  console.table(data)
   insertData(data.lat,data.long, data.date,data.time);
   server.send(msg, senderInfo.port, senderInfo.address, () => {
-    ////console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
+    console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
   })
 });
 server.on('listening', (req, res) => {
   const address = server.address();
-  ////console.log(`UDP server listening on: ${address.address}:${address.port}`);
+  console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
 
