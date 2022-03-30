@@ -51,7 +51,7 @@ const dropTable = async () => {
 };
 //dropTable();
 //insertData(latitud, longitud, fecha);
-
+// Comentario"""//
 const app = express();
 app.use(express.json())
 
