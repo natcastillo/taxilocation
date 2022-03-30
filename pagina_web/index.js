@@ -71,10 +71,14 @@ const dropTable = async () => {
 };
 //dropTable();
 //insertData(latitud, longitud, fecha);
+//<<<<<<< HEAD
 
 
 
 
+//=======
+// Comentario"""//
+//>>>>>>> main
 const app = express();
 app.use(express.json())
 
