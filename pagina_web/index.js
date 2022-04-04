@@ -1,6 +1,8 @@
 const express = require("express");
 const path = require("path");
+const moment = require('moment')
 require('dotenv').config();
+
 
 
 const data = {
@@ -70,6 +72,24 @@ app.get("/record", async (req, res) => {
   const info = await getLastLocation()
   res.send(info).status(200); 
 });
+ app.post('/historicos'), async(req,res)=>{
+  let idate = req.body.finicial, fdate = req.body.ffinal
+  idate = new Date(idate), fdate = new Date(fdate)
+  idate = moment(idate).format('YYYY:MM:DD HH:mm:ss')
+  fdate = moment(fdate).format('YYYY:MM:DD HH:mm:ss')
+  query = `SELECT * FROM gps2sms_table WHERE date BETWEEN ${idate} AND ${fdate}`
+  response = await new Promise((resolve,reject)=>{
+      connection.query(query,(e,d)=>{
+          if(e)throw e
+          else{console.log(query,d)
+              resolve(d)
+          }
+      })
+  })
+  res.status(200).json({
+      response
+  })
+ }
 
 const dgram = require('dgram');
 const { time } = require("console");
