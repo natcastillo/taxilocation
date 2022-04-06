@@ -1,24 +1,82 @@
+body {
+    background-color: rgb(234, 236, 81);
+    margin: 0;
+}
 div {
     margin-bottom: 20px;
     text-align: justify;
 }
 
-label {                          
-    font-size: 100%;
+header {
+    display: flex;
+    width: 100vw;
+    border-bottom: 1px solid rgb(168, 168, 168);
+    height: 55px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    align-items: center;
+}
+.links {
+    text-decoration: none;
+    box-sizing: border-box;
+    padding: 20px;
+    color: rgb(78, 78, 78);
+    margin-bottom: 5px;
+    position: absolute; 
+    height: 55px;
     display: inline-block;
-    width: 50px;
-    text-align: justify;
+    border-right: 1px solid rgb(231, 231, 231);
+    font-weight: bold;
+}
+.links:hover {
+    color: rgb(26, 26, 26);
+    background-color: rgb(241, 241, 241);
+}
+.submitInput {
+    padding: 10px 15px;
+    background-color: rgb(28, 40, 92);
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+}
+.labels {
+    margin: 10px 15px;
 }
 
-header {
-    font-size: 300%;
-}
+
 .labelHome {
-    margin-left: 20px;
     border: 1px outset black;
+    border-radius: 8px;
     width: 200px;
+    text-align: center;
+    padding: 6px;
+    background-color:rgb(238, 238, 238);
+}
+.divHome {
+    display: flex;
+    width: 98%;
+    justify-content:center;
+    align-items:center;
+    margin-bottom: 40px;
+}
+.dateInputs {
+    padding: 8px;
+}
+.recordDiv {
+    border: 2px solid rgb(168, 168, 168);
+    display: flex;
+    margin: 0 auto;
+    margin-bottom:10px;
+    align-items: center;
+    justify-content: center;
+    width: 700px;
+    padding: 15px;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: rgb(238, 238, 238);
 }
 
 #map { 
-    height: 430px; 
+    height: 480px; 
 }

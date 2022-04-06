@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GPS</title>
+        <title>Historicos GPS</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
@@ -12,27 +12,22 @@
     </head>
     <body>
         <header>
-            <a href="/historicosFecha" class="links">Consulta por fecha</a>
+            <a href="/" class="links">Tiempo real</a>
             <a href="/historicosRango" class="links" style="left: 166px;" >Consulta por rango</a>
-            <div style="margin: 0 auto; border-radius: 20px; background-color: #fff; padding: 5px 15px">
+            <div style="margin: 0 auto;">
                 <img src="/Taxi_Location.png" alt="Logo" height="80px">
             </div>
         </header>
-        <div class="divHome">
-            <label class="labels">Latitud:</label>
-            <label id="latID" class="labelHome"></label>
 
-            <label class="labels">Longitud:</label>
-            <label id="longID" class="labelHome"></label>
-    
-            <label class="labels">Fecha:</label>
-            <label id="dateID" class="labelHome"></label>
-    
-    
-            <label class="labels">Hora:</label>
-            <label id="timeID" class="labelHome"></label>
+        <div class="recordDiv">
+            <div>
+                <label>Fecha inicial: </label>
+                <input class="dateInputs" type="datetime-local" id="idate">
+                <label>Fecha final: </label>
+                <input class="dateInputs" type="datetime-local" id="fdate" >            
+            </div>
+            <input class="submitInput" type="submit" value="Consultar" onclick=showRecordInfo()>
         </div>
-
 
         <div id="map"></div>
 
@@ -51,6 +46,6 @@
             }).addTo(map);
                       
         </script>
-        <script src="./showInfo.js"></script>
+        <script src="./record.js"></script>
     </body>
 </html>
