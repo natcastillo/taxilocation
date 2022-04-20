@@ -49,6 +49,7 @@ const showMarkers = async (coords1,coords2) => {
               polyline.setLatLngs([polylineCoords])
               const range2 = document.getElementById('range2');
               range2.max = polyLenght;
+
           });
       }
   });
@@ -72,7 +73,7 @@ const setRange2 = () => {
   const range2 = document.getElementById('range2').value;
   marcador.setLatLng([infoCoords[range2][0],infoCoords[range2][1]])
   marcador.bindPopup(`
-    fecha: ${infoCoords[range2.value][2]}  <br>
+    fecha: ${infoCoords[range2][2]}  <br>
     hora: ${infoCoords[range2][3]} 
   `)
 }
