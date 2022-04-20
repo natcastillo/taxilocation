@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
@@ -18,31 +19,36 @@
                 <h1><img src="/Taxi_Location.png" alt="Logo" height="50px"/>Taxi Location</h1>
             </div>
         </header>
-
-        <div class="recordDiv1">
-            <div>
-                <style>
-                    h3 {text-align: center;}
-                </style>
-                <h3>Localización por área</h3>
-                <label>Escoger radio de búsqueda (1km - 3km):</label>
-                <input type="range" id="range" min="3" max="10" onchange="setRange()">
+        <div class="container">
+            <div class="row">
+                <div cass="col-sm">
+                <div class="recordDiv1">
+                    <div>
+                        <style>
+                            h3 {text-align: center;}
+                        </style>
+                        <h3>Localización por área</h3>
+                        <label>Escoger radio de búsqueda (1km - 3km):</label>
+                        <input type="range" id="range" min="1" max="3" onchange="setRange()">
+                    </div>
+                    <input class="submitInput" type="submit" value="Consultar" onclick=button()>
+                </div>
+                </div>
+                <div class ="col-sm">
+                <div class="sliderMarker">
+                    <div>
+                        <style>
+                            h3 {text-align: center;}
+                        </style>
+                        <h3>Movimiento sobre área</h3>
+                        <label>Mueva el marcador sobre la línea:</label>
+                        <input type="range" id="range" min="3" max="10" onchange="setRange()"> <!-- acomodar rango según necesario -->
+                    </div>
+                    <input class="submitInput" type="submit" value="Consultar" > <!-- agregar funcion onclick=...() segun funcion del slider en backend -->
+                </div>
             </div>
-            <input class="submitInput" type="submit" value="Consultar" onclick=button()>
-        </div>
-
-        <div class="sliderMarker">
-            <div>
-                <style>
-                    h3 {text-align: center;}
-                </style>
-                <h3>Movimiento sobre área</h3>
-                <label>Mueva el marcador sobre la línea:</label>
-                <input type="range" id="range" min="3" max="10" onchange="setRange()"> <!-- acomodar rango según necesario -->
             </div>
-            <input class="submitInput" type="submit" value="Consultar" > <!-- agregar funcion onclick=...() segun funcion del slider en backend -->
-        </div>
-
+            </div>
         <div id="map"></div>
 
         <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
