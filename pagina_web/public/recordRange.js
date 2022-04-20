@@ -3,17 +3,31 @@ initialRange.value = 1;
 let markers = {};
 const markersName = "marcador"
 let infoCoords = [];
+const listener = function(e) {
+  circle.setLatLng(e.latlng);
+  setRange();
+}
 
 const circle = L.circle([10.976029412029105, -74.80355101913315], {radius: 1000, }).addTo(map);
+let clicker = false;
 circle.on({
-    mousedown: function () {
+      /* mousedown: function () {
       map.on('mousemove', function(e) {
         circle.setLatLng(e.latlng);
         setRange();
       });
-    },
+    }, */
     click: function () {
-      map.removeEventListener();
+      if (clicker){
+        clicker = false;
+        map.removeEventListener('mousemove', listener);
+        console.log("click1");
+      }else{
+        clicker = true;
+        map.on('mousemove', listener)
+        console.log("click2");
+      }
+      
     }
   });
 
