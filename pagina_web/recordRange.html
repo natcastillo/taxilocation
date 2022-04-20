@@ -13,17 +13,34 @@
     <body>
         <header>
             <a href="/" class="links">Tiempo real</a>
-            <div style="margin: 0 auto;">
-                <img src="/Taxi_Location.png" alt="Logo" height="80px">
+            <a href="/historicosFecha" class="links" style="left: 120px;">Consulta por fecha</a>
+            <div style="margin: 0 auto; border-radius: 20px; background-color: rgba(255, 255, 255, 0); padding: 5px 15px">
+                <h1><img src="/Taxi_Location.png" alt="Logo" height="50px"/>Taxi Location</h1>
             </div>
         </header>
 
-        <div class="recordDiv">
+        <div class="recordDiv1">
             <div>
-                <label>Escoger radio (1km - 3km):</label>
+                <style>
+                    h3 {text-align: center;}
+                </style>
+                <h3>Localización por área</h3>
+                <label>Escoger radio de búsqueda (1km - 3km):</label>
                 <input type="range" id="range" min="3" max="10" onchange="setRange()">
             </div>
             <input class="submitInput" type="submit" value="Consultar" onclick=button()>
+        </div>
+
+        <div class="sliderMarker">
+            <div>
+                <style>
+                    h3 {text-align: center;}
+                </style>
+                <h3>Movimiento sobre área</h3>
+                <label>Mueva el marcador sobre la línea:</label>
+                <input type="range" id="range" min="3" max="10" onchange="setRange()"> <!-- acomodar rango según necesario -->
+            </div>
+            <input class="submitInput" type="submit" value="Consultar" > <!-- agregar funcion onclick=...() segun funcion del slider en backend -->
         </div>
 
         <div id="map"></div>

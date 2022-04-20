@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(234, 236, 81);
+    background-color: rgb(253, 255, 129);
     margin: 0;
 }
 div {
@@ -10,11 +10,13 @@ div {
 header {
     display: flex;
     width: 100vw;
-    border-bottom: 1px solid rgb(168, 168, 168);
+    border-bottom: 1px solid rgb(185, 181, 181);
+    color: rgb(49, 49, 49);
     height: 55px;
     overflow: hidden;
     margin-bottom: 40px;
     align-items: center;
+
 }
 .links {
     text-decoration: none;
@@ -34,7 +36,7 @@ header {
 }
 .submitInput {
     padding: 10px 15px;
-    background-color: rgb(28, 40, 92);
+    background-color: rgb(201, 28, 28);
     color: #fff;
     border-radius: 5px;
     border: none;
@@ -63,14 +65,43 @@ header {
 .dateInputs {
     padding: 8px;
 }
+
 .recordDiv {
-    border: 2px solid rgb(168, 168, 168);
+    border: 2px solid rgb(64, 65, 63);
     display: flex;
     margin: 0 auto;
     margin-bottom:10px;
     align-items: center;
     justify-content: center;
-    width: 700px;
+    width: 600px;
+    padding: 15px;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: rgb(238, 238, 238);
+}
+
+.recordDiv1 {
+    border: 2px solid rgb(64, 65, 63);
+    display: flex;
+    margin: 0 auto;
+    margin-bottom:10px;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    padding: 15px;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: rgb(238, 238, 238);
+}
+
+.sliderMarker {
+    border: 2px solid rgb(64, 65, 63);
+    display: flex;
+    margin: 0 auto;
+    margin-bottom:10px;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
     padding: 15px;
     flex-direction: column;
     border-radius: 8px;
