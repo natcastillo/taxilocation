@@ -42,6 +42,7 @@ const showMarkers = async (coords1,coords2) => {
               const info = json;
               const polylineCoords =  [];
               polyLenght = info.length;
+              infoCoords=[];
               for (let i = 0; i < info.length; i++) {
                 polylineCoords.push([info[i].lat,info[i].lng])
                 infoCoords.push([info[i].lat,info[i].lng,info[i].date.split('T')[0],info[i].date.split('T')[1].split('.')[0]])
