@@ -4,7 +4,7 @@ let markers = {};
 const markersName = "marcador"
 let infoCoords = [];
 
-const circle = L.circle([10.976029412029105, -74.80355101913315], {radius: 000, }).addTo(map);
+const circle = L.circle([10.976029412029105, -74.80355101913315], {radius: 1000, }).addTo(map);
 circle.on({
     mousedown: function () {
       map.on('mousemove', function(e) {
@@ -72,7 +72,7 @@ const setRange2 = () => {
   const range2 = document.getElementById('range2').value;
   marcador.setLatLng([infoCoords[range2][0],infoCoords[range2][1]])
   marcador.bindPopup(`
-    fecha: ${infoCoords[range2][2]}  <br>
+    fecha: ${infoCoords[range2.value][2]}  <br>
     hora: ${infoCoords[range2][3]} 
   `)
 }
