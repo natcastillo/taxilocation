@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(253, 255, 129);
+    background-color: rgb(248, 250, 124);
     margin: 0;
 }
 div {
@@ -12,7 +12,7 @@ header {
     width: 100vw;
     border-bottom: 1px solid rgb(185, 181, 181);
     color: rgb(49, 49, 49);
-    height: 55px;
+    height: 55px; 
     overflow: hidden;
     margin-bottom: 40px;
     align-items: center;
@@ -88,6 +88,7 @@ header {
     align-items: center;
     justify-content: center;
     width: 500px;
+    height: 190px;
     padding: 15px;
     flex-direction: column;
     border-radius: 8px;
@@ -102,11 +103,14 @@ header {
     align-items: center;
     justify-content: center;
     width: 500px;
+    height: 190px;
     padding: 15px;
     flex-direction: column;
     border-radius: 8px;
     background-color: rgb(238, 238, 238);
 }
+
+
 
 #map { 
     height: 480px; 

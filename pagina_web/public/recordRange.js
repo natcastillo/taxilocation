@@ -2,8 +2,9 @@ const initialRange = document.getElementById('range');
 initialRange.value = 1;
 let markers = {};
 const markersName = "marcador"
+let infoCoords = [];
 
-const circle = L.circle([10.976029412029105, -74.80355101913315], {radius: 1000, }).addTo(map);
+const circle = L.circle([10.976029412029105, -74.80355101913315], {radius: 000, }).addTo(map);
 circle.on({
     mousedown: function () {
       map.on('mousemove', function(e) {
@@ -15,6 +16,9 @@ circle.on({
       map.removeEventListener();
     }
   });
+
+const polyline = L.polyline([[0,0]],{color:'rgb(28, 40, 92)',opacity:1}).addTo(map);
+let polyLenght = 0;
 
 const showMarkers = async (coords1,coords2) => {
   const lat1 = coords1.lat;
@@ -36,12 +40,19 @@ const showMarkers = async (coords1,coords2) => {
       if (response.ok) {
           response.json().then(json => {
               const info = json;
-              for (let i = 0; i < info.length; i+=30) {
-                markers[markersName+i] = L.marker([info[i].lat, info[i].lng]).bindPopup(`Fecha: ${info[i].date.split("T").join(" ").split(".")[0]}`).addTo(map);
+              const polylineCoords =  [];
+              polyLenght = info.length;
+              for (let i = 0; i < info.length; i++) {
+                polylineCoords.push([info[i].lat,info[i].lng])
+                infoCoords.push([info[i].lat,info[i].lng,info[i].date.split('T')[0],info[i].date.split('T')[1].split('.')[0]])
               }
+              polyline.setLatLngs([polylineCoords])
+              const range2 = document.getElementById('range2');
+              range2.max = polyLenght;
           });
       }
   });
+  
 }
 
 const setRange = () => {
@@ -56,3 +67,12 @@ const button = () => {
   showMarkers(coords1,coords2);
 }
 
+const marcador = L.marker([0, 0]).addTo(map);
+const setRange2 = () => {
+  const range2 = document.getElementById('range2').value;
+  marcador.setLatLng([infoCoords[range2][0],infoCoords[range2][1]])
+  marcador.bindPopup(`
+    fecha: ${infoCoords[range2][2]}  <br>
+    hora: ${infoCoords[range2][3]} 
+  `)
+}

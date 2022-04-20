@@ -25,11 +25,11 @@
                 <div class="recordDiv1">
                     <div>
                         <style>
-                            h3 {text-align: center;}
+                            h4 {text-align: center;}
                         </style>
-                        <h3>Localización por área</h3>
+                        <h4>Localización por área</h4>
                         <label>Escoger radio de búsqueda (1km - 3km):</label>
-                        <input type="range" id="range" min="1" max="3" onchange="setRange()">
+                        <input type="range" id="range" min="3" max="10" onchange="setRange()">
                     </div>
                     <input class="submitInput" type="submit" value="Consultar" onclick=button()>
                 </div>
@@ -38,15 +38,16 @@
                 <div class="sliderMarker">
                     <div>
                         <style>
-                            h3 {text-align: center;}
+                            h4 {text-align: center;}
                         </style>
-                        <h3>Movimiento sobre área</h3>
+                        <h4>Movimiento sobre área</h4>
                         <label>Mueva el marcador sobre la línea:</label>
-                        <input type="range" id="range" min="3" max="10" onchange="setRange()"> <!-- acomodar rango según necesario -->
+                        <input type="range" id="range2" min="1" max="10" value="1" onchange="setRange2()"> <!-- acomodar rango según necesario -->
                     </div>
-                    <input class="submitInput" type="submit" value="Consultar" > <!-- agregar funcion onclick=...() segun funcion del slider en backend -->
                 </div>
-            </div>
+                </div>
+            
+                            
             </div>
             </div>
         <div id="map"></div>
