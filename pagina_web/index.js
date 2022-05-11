@@ -96,8 +96,9 @@ const insertData = async (info) => {
   const lng = info[1];
   const date = info[3];
   const hour = info[2];
+  const rpm = info[4];
   const dateComplete = date + " " + hour;  
-  const query = `INSERT INTO gps2sms_table (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}")`;
+  const query = `INSERT INTO gps2sms_table (lat, lng, date,rpm) VALUES (${lat}, ${lng}, "${dateComplete}",${rpm})`;
   connection.query(query, function(err, result){
     if(err)throw err;
     console.log("Registro guardado exitosamente.")

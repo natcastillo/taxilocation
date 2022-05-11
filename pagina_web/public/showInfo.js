@@ -3,6 +3,7 @@ const latID = document.getElementById('latID');
 const longID = document.getElementById('longID');
 const dateID = document.getElementById('dateID');
 const timeID = document.getElementById('timeID');
+const rpmID = document.getElementById('rpmID');
 
 // Crear vector para guardar coordenadas de la polilinea.
 const polylineCoords =  [];
@@ -32,6 +33,7 @@ const showData = async () => {
                 console.log(lastInfo)
                 dateID.textContent = lastInfo.date.split('T')[0];
                 timeID.textContent = lastInfo.date.split('T')[1].split('.')[0];
+                rpmID.textContent="123"
                 // Se modifica la coordenada del marcador
                 map.flyTo([lastInfo.lat,lastInfo.lng],13);
                 marcador.setLatLng([lastInfo.lat,lastInfo.lng])
