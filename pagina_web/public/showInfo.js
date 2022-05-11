@@ -30,10 +30,9 @@ const showData = async () => {
                 // Se coloca la informacion en los elementos seleccionados al comienzo del codigo.
                 latID.textContent = lastInfo.lat;
                 longID.textContent = lastInfo.lng;
-                console.log(lastInfo)
+                rpmID.textContent = lastInfo.RPM;
                 dateID.textContent = lastInfo.date.split('T')[0];
                 timeID.textContent = lastInfo.date.split('T')[1].split('.')[0];
-                rpmID.textContent="123"
                 // Se modifica la coordenada del marcador
                 map.flyTo([lastInfo.lat,lastInfo.lng],13);
                 marcador.setLatLng([lastInfo.lat,lastInfo.lng])
