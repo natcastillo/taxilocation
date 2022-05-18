@@ -40,33 +40,18 @@ app.get("/historicosRango", (req, res) => {
 });
 
 // ======================== ++ APIS ++ ===========================
-
+// fetch(www.facebook.com/login?placa=KJL236
 // ======================== ++ API TIEMPO REAL ++ ===========================
 app.get("/data", async (req, res) => {
-  connection.query(`SELECT * FROM taxis`, function(error, data){
-    if(error) {
-      console.log(error);
-      res.status(500).send();
-    }else{
-      const placas = data;
-      var finalArray = new Array();
-      var cont = 0;
-      for(var i=0; i<data.length; i++){
-				getOneCar(placas[i].Id).then(function(response){
-					finalArray.push(response);
-					if(cont == data.length - 1){
-            console.log(finalArray);
-						res.send(finalArray);
-					}else{
-						cont++;
-					}
-				},
-        function(rejected){
-          console.log(rejected);
-          res.status(500).send();
-        });
-			}
-    }
+  const vehiculo = req.query.placa;
+  const query = `SELECT * FROM gps2sms_table WHERE driver = "${vehiculo}" ORDER BY ID DESC LIMIT 1`;
+  connection.query(query,(err,result) => {
+    if (!err) {
+      return res.send(result).status(200);     
+    } else {
+        console.log(`Ha ocurrido el siguiente ${err}`);
+        return res.status(500);
+    };
   });
 });
 
@@ -149,18 +134,3 @@ socket.bind(3000);
 // ======================== ++ INICIAR SERVIDOR ++ ===========================
 
 app.listen(5000, () => console.log('Server on port: 5000'));
-
-// ======================== ++ PROMISES ++ ===========================
-
-function getOneCar(auto){
-	return new Promise(function(resolve, reject){
-		connection.query(`SELECT * FROM gps2sms_table WHERE driver = '${auto}' ORDER BY Id DESC LIMIT 1`, function(error, data){
-			if(error){
-				console.log("Error in query: ", error);
-        reject(error);
-			}else{
-				resolve(data[0]);
-			}
-		});
-	});
-}

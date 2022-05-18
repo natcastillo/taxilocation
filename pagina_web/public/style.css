@@ -38,7 +38,6 @@ header {
 .selectList-container {
     left: 0px;
     right: 0px;
-    border: 1px solid red;
 
     display: flex;
     justify-content: center;

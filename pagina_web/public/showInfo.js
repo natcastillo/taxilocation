@@ -6,7 +6,7 @@ const timeID = document.getElementById('timeID');
 const rpmID = document.getElementById('rpmID');
 
 // Crear vector para guardar coordenadas de la polilinea.
-const polylineCoords =  [];
+let polylineCoords =  [];
 
 // Inicializar marcador y polilinea en la coordenada [0,0], esta coordenada se va 
 // actualizando en tiempo real con la informacion de la base de datos.
@@ -14,9 +14,14 @@ const polylineCoords =  [];
 const polyline = L.polyline([[0,0]],{color:'red',opacity:1}).addTo(map);
 const marcador = L.marker([0, 0]).addTo(map);
 
+const deletePolyline = () => {
+    polylineCoords = [];   
+}
+
 // funcion para mostrar la informacion de la base de datos
-const showData = async () => {
-    fetch('/data', {
+const showData = async (resetPolyline) => {
+    const placa = document.getElementById("inputPlaca").value;  
+    fetch(`/data?placa=${placa}`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -31,8 +36,13 @@ const showData = async () => {
                 latID.textContent = lastInfo.lat;
                 longID.textContent = lastInfo.lng;
                 rpmID.textContent = lastInfo.RPM;
-                dateID.textContent = lastInfo.date.split('T')[0];
-                timeID.textContent = lastInfo.date.split('T')[1].split('.')[0];
+                try {
+                    dateID.textContent = lastInfo.date.split('T')[0];
+                    timeID.textContent = lastInfo.date.split('T')[1].split('.')[0];
+                } catch (error) {
+                    // console.error(error);
+                }
+                    
                 // Se modifica la coordenada del marcador
                 map.flyTo([lastInfo.lat,lastInfo.lng],13);
                 marcador.setLatLng([lastInfo.lat,lastInfo.lng])
@@ -43,6 +53,9 @@ const showData = async () => {
             });
         }
     });
+    if ( resetPolyline == true ) {
+        deletePolyline();
+    }
 };
 // Se ejecuta la funcion por primera vez para mostrar la informacion
 showData();
