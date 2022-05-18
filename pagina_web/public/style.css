@@ -34,6 +34,32 @@ header {
     color: rgb(26, 26, 26);
     background-color: rgb(241, 241, 241);
 }
+
+.selectList-container {
+    left: 0px;
+    right: 0px;
+    border: 1px solid red;
+
+    display: flex;
+    justify-content: center;
+}
+
+.selectList-button {
+    margin: 0px;
+}
+
+.selectList {
+    padding: 0px;
+    margin: 0px;
+    width: 100px !important;
+    text-align: center;
+}
+
+.selectList > .item {
+    margin: 0px;
+    padding: 0px;
+}
+
 .submitInput {
     padding: 10px 15px;
     background-color: rgb(201, 28, 28);
