@@ -95,11 +95,12 @@ app.get("/recordRange", async (req, res) => {
 const insertData = async (info) => {
   const lat = info[0];
   const lng = info[1];
-  const date = info[3];
-  const hour = info[2];
+  const date = info[2];
+  const hour = info[3];
   const rpm = info[4];
+  const driv = info[5];
   const dateComplete = date + " " + hour;  
-  const query = `INSERT INTO gps2sms_table (lat, lng, date,rpm) VALUES (${lat}, ${lng}, "${dateComplete}",${rpm})`;
+  const query = `INSERT INTO gps2sms_table (lat, lng, date,rpm,driver) VALUES (${lat}, ${lng}, "${dateComplete}",${rpm},"${driv}")`;
   connection.query(query, function(err, result){
     if(err)throw err;
     console.log("Registro guardado exitosamente.")
