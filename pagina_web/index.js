@@ -42,16 +42,20 @@ app.get("/historicosRango", (req, res) => {
 // ======================== ++ APIS ++ ===========================
 // fetch(www.facebook.com/login?placa=KJL236
 // ======================== ++ API TIEMPO REAL ++ ===========================
-app.get("/data", async (req, res) => {
+app.get('/data', async (req, res) => {
   const vehiculo = req.query.placa;
-  const query = `SELECT * FROM gps2sms_table WHERE driver = "${vehiculo}" ORDER BY ID DESC LIMIT 1`;
-  connection.query(query,(err,result) => {
+  if (vehiculo === 'Todos') {
+    query = `SELECT * FROM gps2sms_table ORDER BY ID DESC LIMIT 1`;
+  } else {
+    query = `SELECT * FROM gps2sms_table WHERE driver = "${vehiculo}" ORDER BY ID DESC LIMIT 1`;
+  }
+  connection.query(query, (err, result) => {
     if (!err) {
-      return res.send(result).status(200);     
+      return res.send(result).status(200);
     } else {
-        console.log(`Ha ocurrido el siguiente ${err}`);
-        return res.status(500);
-    };
+      console.log(`Ha ocurrido el siguiente ${err}`);
+      return res.status(500);
+    }
   });
 });
 
