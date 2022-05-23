@@ -35,7 +35,13 @@ const showData = async (resetPolyline) => {
                 // Se coloca la informacion en los elementos seleccionados al comienzo del codigo.
                 latID.textContent = lastInfo.lat;
                 longID.textContent = lastInfo.lng;
-                rpmID.textContent = lastInfo.RPM;
+                
+                if(lastInfo.RPM==0){
+                    rpmID.textContent = "OBDII Device not connected";
+                }else{
+                    rpmID.textContent = lastInfo.RPM;
+                }
+                
                 try {
                     dateID.textContent = lastInfo.date.split('T')[0];
                     timeID.textContent = lastInfo.date.split('T')[1].split('.')[0];
@@ -63,4 +69,4 @@ showData();
 // Se configura la ejecucion de la funcion cada cinco segundos
 const timer = setInterval(() => {
     showData();
-}, 5000);
+}, 6000);
