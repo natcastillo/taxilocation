@@ -29,16 +29,21 @@ connection.connect(function (err){
 // ======================== ++ RUTAS WEB ++ ===========================
 
 app.get("/", (req, res) => {
+  return res.sendFile(path.join(__dirname + "/frontpage.html"));
+});
+
+app.get("/TiempoReal", (req, res) => {
   return res.sendFile(path.join(__dirname + "/paginaweb.html"));
 });
 
-app.get("/historicosFecha", (req, res) => {
+app.get("/Historicos", (req, res) => {
   return res.sendFile(path.join(__dirname + "/record.html"));
 });
 
-app.get("/historicosRango", (req, res) => {
-  return res.sendFile(path.join(__dirname + "/recordRange.html"));
+app.get("/About", (req, res) => {
+  return res.sendFile(path.join(__dirname + "/about.html"));
 });
+
 
 // ======================== ++ APIS ++ ===========================
 // fetch(www.facebook.com/login?placa=KJL236

@@ -19,10 +19,18 @@ let polylineCoords2 =  [];
 // actualizando en tiempo real con la informacion de la base de datos.
 
 const polyline1 = L.polyline([[0,0]],{color:'red',opacity:1}).addTo(map);
-const marcador1 = L.marker([0, 0]);
+const marcador1 = L.marker([0, 0]).bindPopup('Placa: UZC 716');
 
 const polyline2 = L.polyline([[0,0]],{color:'blue',opacity:1}).addTo(map);
-const marcador2 = L.marker([0, 0]);
+const marcador2 = L.marker([0, 0], {Icon: RedIcon}).bindPopup('Placa: KJL 236');
+
+var RedIcon = new L.Icon({
+    iconUrl: 'taxilocation-main/pagina_web/public/marker-icon-red.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    shadowSize: [41, 41]
+});
 
 const deletePolyline = () => {
     polylineCoords = [];
@@ -117,7 +125,7 @@ const showData = async (placa,polylineVector,marker,polyline) => {
                         rpmID.textContent = '';                      
                     }
                 } else {
-                    map.flyTo([10.988522380634508, -74.80291441230843],11);
+                    map.flyTo([10.988522380634508, -74.80291441230843],13);
                 };
                 // Se modifica la coordenada del marcador
                 marker.setLatLng([lastInfo.lat,lastInfo.lng])

@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(248, 250, 124);
+    background-color: rgb(255, 204, 45);
     margin: 0;
 }
 div {
@@ -7,22 +7,23 @@ div {
     text-align: justify;
 }
 
-header {
+.header {
     display: flex;
     width: 100vw;
-    border-bottom: 1px solid rgb(185, 181, 181);
-    color: rgb(49, 49, 49);
+    border-bottom: 1px solid rgb(255, 204, 45);
+    color: rgb(0, 0, 0);
     height: 55px; 
     overflow: hidden;
     margin-bottom: 40px;
     align-items: center;
-
+    font-size: larger;
 }
+
 .links {
     text-decoration: none;
     box-sizing: border-box;
     padding: 20px;
-    color: rgb(78, 78, 78);
+    color: rgb(0, 0, 0);
     margin-bottom: 5px;
     position: absolute; 
     height: 55px;
@@ -61,7 +62,7 @@ header {
 
 .submitInput {
     padding: 10px 15px;
-    background-color: rgb(201, 28, 28);
+    background-color: rgba(214,57,48,255);
     color: #fff;
     border-radius: 5px;
     border: none;
@@ -85,7 +86,7 @@ header {
     width: 98%;
     justify-content:center;
     align-items:center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 .dateInputs {
     padding: 8px;
@@ -111,7 +112,6 @@ header {
     margin: 0 auto;
     margin-bottom:10px;
     align-items: center;
-    justify-content: center;
     padding: 30px;
     flex-direction: column;
     border-radius: 8px;
@@ -126,17 +126,161 @@ header {
     align-items: center;
     justify-content: center;
     padding: 30px;
+    width: 600px;
+    padding: 15px;
     flex-direction: column;
     border-radius: 8px;
     background-color: rgb(238, 238, 238);
 }
 
-.enable-button {
-    
-}
-
-
-
 #map { 
     height: 480px; 
 }
+
+h1 {
+    text-align: center;    
+    font-family: Arial, Helvetica, sans-serif ;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(0, 0, 0);
+}
+
+li {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 20px 22px;
+    text-decoration: none;
+}
+
+
+li a:hover:not(.active) {
+    background-color: #111;
+}
+
+dl{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(0, 0, 0);
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+ld {
+    float: left;
+    border-right:1px solid #bbb;
+}
+
+ld:last-child {
+    border-right: none;
+}
+
+ld a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 3px 22px;
+    text-decoration: none;
+}
+
+ld a:hover:not(.active) {
+    background-color: #111;
+}
+
+.active {
+    background-color: rgba(214,57,48,255);
+}
+
+.responsive {
+    width: 100%;
+    height: auto;
+}
+
+a {
+    outline: none;
+    text-decoration: none;
+    padding: 2px 1px 0;
+}
+  
+a.blancos:link {
+    color: #ffffff;
+}
+  
+a.blancos:visited {
+    color: #ffffff;
+}
+
+a.negros:link {
+    color: #000000;
+    font-size: 150%;
+}
+  
+a.negros:visited {
+    color: #000000;
+    font-size: 150%;
+}
+
+#copyright {
+	float: left;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	text-align: center;
+	bottom: 0px;
+	width: 100%;
+}
+
+.image-wrapper {
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin: 0 auto;
+}
+  
+.something-img {
+    width: 100%;
+    height: auto;
+}
+  
+.something-text {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    height: 85%;
+} 
+
+/* .container {
+    position: relative;
+   
+}
+  
+
+.text-block {
+    position: sticky;
+    text-align: center;
+    bottom: 50%;
+    right: 0px;
+    background-color: rgba(0, 0, 0, 0.585);
+    color: white;
+    padding-left: 15px;
+    padding-right: 15px;
+} */

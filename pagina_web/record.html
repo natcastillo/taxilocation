@@ -11,25 +11,38 @@
         <link rel="stylesheet" href="./style.css">
     </head>
     <body>
-        <header>
-            <a href="/" class="links">Tiempo real</a>
-            <div style="margin: 0 auto; border-radius: 20px; background-color: rgba(255, 255, 255, 0); padding: 5px 15px">
-                <h1><img src="/Taxi_Location.png" alt="Logo" height="50px"/>Taxi Location</h1>
+        <header>           
+            <div style="margin: 0 auto; border-radius: 20px; background-color: rgb(255, 204, 45); padding-top: 5px;">
+                <h1>
+                    <b>
+                        <a
+                          href="/" class="negros" >
+                          <img src="/Taxi_Location.png" alt="Logo" height="50px" />Taxi Location
+                        </a>
+                      </b>                
+                </h1>
             </div>
         </header>
 
+        <dl>
+            <ld><a href="/" class="blancos">Inicio</a></ld>
+            <ld><a href="/TiempoReal" class="blancos">Tiempo Real</a></ld>
+            <ld><a class="active" href="/Historicos" class="blancos">Historicos</a></ld>
+            <ld style="float:right" class="blancos"><a href="/about">About</a></ld>
+        </dl>
+
         <div class="forms" style="display: flex; justify-content: space-around;">
             <div class="recordDiv">
-                <div>
+                <div style="margin-top : 20px">
                     <label>Fecha inicial: </label>
                     <input class="dateInputs" type="datetime-local" id="idate">
                     <label>Fecha final: </label>
                     <input class="dateInputs" type="datetime-local" id="fdate" >            
-                </div>
-                <input class="submitInput" type="submit" value="Consultar" onclick=showRecordInfo()>
-                <br>
-                <span>Radio del círculo:</span>
+                </div>                
+                <span style="margin-top : 5px">Radio del círculo:</span>
                 <input type="range" name="resize" id="resize" onchange="reSizeCircle(this)" max="10" value="5">
+                <input style="margin-top : 25px" class="submitInput" type="submit" value="Consultar" onclick=showRecordInfo()>
+                <br>
             </div>
 
             <div class="sliderMarker">
@@ -47,7 +60,7 @@
                     <span style="color: blue">KJL236</span>
 
                     <div style="width:100%; margin-top: 20px; margin-bottom: 0px; display:flex; justify-content:center;">
-                        <button class="enable-button enabled" onclick="searchRange()" style="height:30px; cursor:pointer">Consultar</button>
+                        <button class="submitInput" onclick="searchRange()" style="cursor:pointer">Consultar</button>
                     </div>
                 </div>
             </div>
@@ -74,4 +87,7 @@
         <script src="./record.js"></script>
         <script src="./fromRange.js"></script>
     </body>
+    <div id="copyright">
+        Designed with love &hearts;
+    </div>
 </html>
