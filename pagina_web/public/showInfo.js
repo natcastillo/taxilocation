@@ -125,7 +125,7 @@ const showData = async (placa,polylineVector,marker,polyline) => {
                         rpmID.textContent = '';                      
                     }
                 } else {
-                    map.flyTo([10.988522380634508, -74.80291441230843],13);
+                    ;
                 };
                 // Se modifica la coordenada del marcador
                 marker.setLatLng([lastInfo.lat,lastInfo.lng])
