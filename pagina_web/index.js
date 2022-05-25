@@ -7,6 +7,7 @@ require('dotenv').config();
 // ======================== ++ CREAR APP ++ ===========================
 
 const app = express();
+app.set('port', process.env.PORT || 5000);
 app.use(express.json())
 app.use(express.static(__dirname + '/public'));
 
@@ -64,27 +65,13 @@ app.get("/record", async (req, res) => {
   const idate = req.query.idate;
   const fdate = req.query.fdate;
 
-  const query = `SELECT * FROM gps2sms_table WHERE date BETWEEN STR_TO_DATE( "${idate}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${fdate}" ,"%Y-%m-%d %H:%i:%s")`;
+  console.log(idate);
+
+  const query = `SELECT * FROM gps2sms_table WHERE date BETWEEN '${idate}' AND '${fdate}'`;
+  console.log(query);
   connection.query(query,(err, result) => {
     if (!err) {
-      return res.send(result).status(200);
-    } else {
-      console.log(`Ha ocurrido el siguiente ${err}`);
-      return res.status(500);
-    }
-  })
-});
-
-// ======================== ++ API RANGOS ++ ===========================
-app.get("/recordRange", async (req, res) => {
-  const lat1 = req.query.lat1;
-  const lat2 = req.query.lat2;
-  const lon1 = req.query.lon1;
-  const lon2 = req.query.lon2;
-
-  const query = `SELECT * FROM gps2sms_table WHERE (lat BETWEEN "${lat1}" AND "${lat2}") AND (lng BETWEEN "${lon1}" AND "${lon2}")`;
-  connection.query(query,(err, result) => {
-    if (!err) {
+      console.log(result);
       return res.send(result).status(200);
     } else {
       console.log(`Ha ocurrido el siguiente ${err}`);
@@ -138,4 +125,4 @@ socket.bind(3000);
 
 // ======================== ++ INICIAR SERVIDOR ++ ===========================
 
-app.listen(5000, () => console.log('Server on port: 5000'));
+app.listen(app.get('port'), () => console.log(`Server on port: ${app.get('port')}`));

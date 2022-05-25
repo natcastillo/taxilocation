@@ -1,3 +1,11 @@
+var histUzc = new Array();
+var histKjl = new Array();
+
+var infoRed = new Array();
+var infoBlue = new Array();
+
+var histPolylines = new Array();
+
 //Crear fecha con el dia de hoy
 const today = new Date();
 let dd = today.getDate();
@@ -14,6 +22,7 @@ minutes < 10 ? minutes = "0" + minutes : minutes = minutes;
 const hora = hora1 + ":" + minutes;
 
 const currentDate = yyyy + "-" + mm + "-" + dd + "T" + hora;
+
 
 //Obtener los inputs donde se van a colocar la fechas
 const startDate = document.getElementById("idate");
@@ -36,17 +45,14 @@ endDate.addEventListener("click", async () => {
     endDate.min = startDate.value;
 })
 
-// Se inicializa la polilinea
-const polyline = L.polyline([[0,0]],{color:'rgb(28, 40, 92)',opacity:1}).addTo(map);
-
 // se crea funcion para trazar la polilinea
 const showRecordInfo = async () => {
     // Se obtienen los valores de fecha en los calendarios y se formatean para poder hacer la consulta.
     // Se tienen que formatear porque por defecto traen la siguiente estructura, YYYY/MM/DDThh:mm:ss,
     // Entonces se elimina la T que separa la fecha y la hora, y se coloca un espacio, obteniendo 
     // la siguiente estructura YYYY/MM/DD hh:mm:ss
-    const idate = document.getElementById('idate').value.split('T').join(' ');
-    const fdate = document.getElementById('fdate').value.split('T').join(' ');
+    const idate = document.getElementById('idate').value; //.value.split('T').join(' ');
+    const fdate = document.getElementById('fdate').value; //.value.split('T').join(' ');
     
     // Se hace el fetch a la api con las fechas para obtener la informacion de la base de datos
     fetch(`/record?idate=${idate}&fdate=${fdate}`, {
@@ -56,18 +62,41 @@ const showRecordInfo = async () => {
         },
     },
     ).then(response => {
+        histUzc = [];
+        histKjl = [];
+        for(var poly of histPolylines) {
+            map.removeLayer(poly);
+        }
         if (response.ok) {
             response.json().then(json => {
                 const info = json;
-                // Se crea un vector que va a contener las coordenadas de la polilinea
-                const polylineCoords =  [];
-                // Se rellena el vector con la informacion obtenida de la base de datos                
-                for (let i = 0; i < info.length; i++) {
-                    polylineCoords[i] = [info[i].lat,info[i].lng]
+                
+                // Se rellena el vector con la informacion obtenida de la base de datos  
+                for(var item of info) {
+                    if(item.driver == 'UZC716') {
+                        histUzc.push([item.lat, item.lng]);
+                        infoRed.push({
+                            fecha: item.date.split('T')[0],
+                            hora: item.date.split('T')[1],
+                            rpm: item.RPM
+                        });
+                    }
+                    if(item.driver == 'KJL236') {
+                        histKjl.push([item.lat, item.lng]);
+                        infoBlue.push({
+                            fecha: item.date.split('T')[0],
+                            hora: item.date.split('T')[1],
+                            rpm: item.RPM
+                        });
+                    }
                 }
-                console.log(polylineCoords);
+                console.log(histUzc);
+                console.log(histKjl);
                 // Se traza la polilinea
-                polyline.setLatLngs(polylineCoords)
+                const poly1 = L.polyline(histUzc, {color: 'red'}).addTo(map);
+                const poly2 = L.polyline(histKjl, {color: 'blue'}).addTo(map);
+                histPolylines.push(poly1);
+                histPolylines.push(poly2);
             });
         }
     });

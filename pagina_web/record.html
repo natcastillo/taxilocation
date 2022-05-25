@@ -13,21 +13,46 @@
     <body>
         <header>
             <a href="/" class="links">Tiempo real</a>
-            <a href="/historicosRango" class="links" style="left: 120px;" >Consulta por rango</a>
             <div style="margin: 0 auto; border-radius: 20px; background-color: rgba(255, 255, 255, 0); padding: 5px 15px">
                 <h1><img src="/Taxi_Location.png" alt="Logo" height="50px"/>Taxi Location</h1>
             </div>
         </header>
 
-        <div class="recordDiv">
-            <div>
-                <label>Fecha inicial: </label>
-                <input class="dateInputs" type="datetime-local" id="idate">
-                <label>Fecha final: </label>
-                <input class="dateInputs" type="datetime-local" id="fdate" >            
+        <div class="forms" style="display: flex; justify-content: space-around;">
+            <div class="recordDiv">
+                <div>
+                    <label>Fecha inicial: </label>
+                    <input class="dateInputs" type="datetime-local" id="idate">
+                    <label>Fecha final: </label>
+                    <input class="dateInputs" type="datetime-local" id="fdate" >            
+                </div>
+                <input class="submitInput" type="submit" value="Consultar" onclick=showRecordInfo()>
+                <br>
+                <span>Radio del círculo:</span>
+                <input type="range" name="resize" id="resize" onchange="reSizeCircle(this)" max="10" value="5">
             </div>
-            <input class="submitInput" type="submit" value="Consultar" onclick=showRecordInfo()>
+
+            <div class="sliderMarker">
+                <div>
+                    <style>
+                        h4 {text-align: center;}
+                    </style>
+                    <h4>Movimiento sobre área</h4>
+                    <label>Mueva el marcador sobre la línea:</label>
+                    <br>
+                    <input type="range" id="rangeRed" min="1" max="10" value="1" onchange="setRangeRed(this)">
+                    <span style="color: red;">UZC716</span>
+                    <br>
+                    <input type="range" id="rangeBlue" min="1" max="10" value="1" onchange="setRangeBlue(this)">
+                    <span style="color: blue">KJL236</span>
+
+                    <div style="width:100%; margin-top: 20px; margin-bottom: 0px; display:flex; justify-content:center;">
+                        <button class="enable-button enabled" onclick="searchRange()" style="height:30px; cursor:pointer">Consultar</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        
 
         <div id="map"></div>
 
@@ -47,5 +72,6 @@
                       
         </script>
         <script src="./record.js"></script>
+        <script src="./fromRange.js"></script>
     </body>
 </html>
